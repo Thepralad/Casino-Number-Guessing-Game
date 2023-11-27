@@ -53,7 +53,7 @@ int GuessTheNumber::choice(){
     do {
         std::cout << "Try your luck! (1 - 6): ";
         std::cin >> inputNumber;
-        if(inputNumber >  1 && inputNumber < 6){
+        if(inputNumber >  0 && inputNumber < 7){
             validInput = true;
         }
         else {
@@ -66,9 +66,34 @@ int GuessTheNumber::choice(){
 }
 
 int GuessTheNumber::gameplay(){
+    std::cout << "Balance: " << balance << std::endl;
+    int n = choice();
+    int count = 0;
+    const int arrSize = 6;
+    int* arr= generateRandomArray();
     
+    for(int i = 0; i < arrSize; i++){
+        if(n == arr[i]){
+            count++;
+        }
+    }
+    
+    for(int i = 0; i < arrSize; i++){
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << n << " appeared " << count << " times" << std::endl;
+
+   
+
+}
+
+void GuessTheNumber::run(){
+    gameplay();
 }
 
 int main(){
-    
+   GuessTheNumber obj;
+   obj.run();
 }
