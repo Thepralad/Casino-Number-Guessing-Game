@@ -66,26 +66,41 @@ int GuessTheNumber::choice(){
 }
 
 int GuessTheNumber::gameplay(){
-    std::cout << "Balance: " << balance << std::endl;
-    int n = choice();
+
+    std::cout << "Balance: $" << balance << std::endl;
+    
     int count = 0;
     const int arrSize = 6;
     int* arr= generateRandomArray();
     
-    for(int i = 0; i < arrSize; i++){
-        if(n == arr[i]){
-            count++;
-        }
-    }
     
-    for(int i = 0; i < arrSize; i++){
-        std::cout << arr[i] << " ";
+    while(balance > 0){
+
+        int n = choice();
+
+        for(int i = 0; i < arrSize; i++){
+            if(n == arr[i]){
+                count++;
+            }
+        }
+        
+        for(int i = 0; i < arrSize; i++){
+            std::cout << arr[i] << " ";
+        }
+        std::cout << std::endl;
+
+        if(count < 1){
+            balance = balance - 25;
+        }
+        else{
+        balance = 25 * (count + 1);
+        count = 0;
+        }
+        std::cout << n << " appeared " << count << " times" << std::endl;
+
+        std::cout << "Balance: $" << balance << std::endl;
+    
     }
-    std::cout << std::endl;
-
-    std::cout << n << " appeared " << count << " times" << std::endl;
-
-   
 
 }
 
