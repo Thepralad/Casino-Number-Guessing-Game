@@ -50,10 +50,11 @@ int* GuessTheNumber::generateRandomArray() {
 int GuessTheNumber::choice(){
     int inputNumber;
     bool validInput = false;
+
     do {
         std::cout << "Try your luck! (1 - 6): ";
         std::cin >> inputNumber;
-        if(inputNumber >  0 && inputNumber < 7){
+        if (inputNumber >  0 && inputNumber < 7){
             validInput = true;
         }
         else {
@@ -62,6 +63,7 @@ int GuessTheNumber::choice(){
         }
 
     } while(!validInput);
+
     return inputNumber;
 }
 
@@ -78,37 +80,50 @@ int GuessTheNumber::gameplay(){
 
         int n = choice();
 
-        for(int i = 0; i < arrSize; i++){
-            if(n == arr[i]){
-                count++;
+        if(n == 0){
+            return 0;
+        }
+        else
+        {
+            for(int i = 0; i < arrSize; i++){
+                if(n == arr[i]){
+                    count++;
+                }
             }
-        }
-        
-        for(int i = 0; i < arrSize; i++){
-            std::cout << arr[i] << " ";
-        }
-        std::cout << std::endl;
+            
+            for(int i = 0; i < arrSize; i++){
+                std::cout << arr[i] << " ";
+            }
+            std::cout << std::endl;
 
-        if(count < 1){
-            balance = balance - 25;
-        }
-        else{
-        balance = 25 * (count + 1);
-        count = 0;
-        }
-        std::cout << n << " appeared " << count << " times" << std::endl;
+            if(count < 1){
+                
+                balance = balance - 25;
 
-        std::cout << "Balance: $" << balance << std::endl;
+            }
+            else if (count > 1){
+
+                balance = 25 * (count + 1);
+
+            }
+            std::cout << n << " appeared " << count << " times" << std::endl;
+
+            std::cout << "Balance: $" << balance << std::endl;
     
+        }
     }
 
 }
 
 void GuessTheNumber::run(){
+
     gameplay();
+
 }
 
 int main(){
+
    GuessTheNumber obj;
    obj.run();
+
 }
